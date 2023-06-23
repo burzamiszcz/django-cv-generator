@@ -1,0 +1,22 @@
+
+
+<form method="POST">
+    {% csrf_token %}
+    {{ skillForm.as_div }}
+
+    {% comment %} {{ languageForm.as_div }}
+    {{ educationForm.as_div }}
+    {{ certificationForm.as_div }} {% endcomment %}
+<button type="submit">Submit</button>
+</form>
+
+
+<form method="POST">
+    {% csrf_token %}
+
+    {% for field in skillsSelection %}
+        {{ field }}
+    {% endfor %}
+
+    <button type="submit">Save</button>
+</form>

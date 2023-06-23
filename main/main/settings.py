@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cv_generator',
 ]
 
 MIDDLEWARE = [
@@ -66,7 +67,7 @@ TEMPLATES = [
         },
     },
 ]
-
+STATIC_URL = 'static'
 WSGI_APPLICATION = 'main.wsgi.application'
 
 
