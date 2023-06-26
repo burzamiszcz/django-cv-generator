@@ -20,6 +20,7 @@ class Skill(models.Model):
 class Language(models.Model):
     language = models.CharField(max_length=50)
     LEVEL_CHOICES = (
+        ('Na', 'Native'),
         ('B1', 'B1'),
         ('B2', 'B2'),
         ('C1', 'C1'),
@@ -27,7 +28,7 @@ class Language(models.Model):
     level = models.CharField(verbose_name='Level', max_length=2, choices=LEVEL_CHOICES)
 
 class Education(models.Model):
-    degree_name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
     university_name = models.CharField(max_length=50)
     start_date = models.DateField()
     end_date  = models.DateField()

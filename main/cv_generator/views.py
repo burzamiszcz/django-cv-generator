@@ -31,16 +31,42 @@ def skills(request):
     choicesForSkillSelection = [(skill.skill_name, skill.skill_name) for skill in Skill.objects.all()]
     allSkills = Skill.objects.all()
     skillForm = SkillForm()
-    languageForm = LanguageForm()
     educationForm = EducationForm()
     certifictionForm = CertificationForm()
     skillSelection = SkillSelectionForm(initial={'skills':[skill.skill_name for skill in Skill.objects.all() if skill.status]})
     skillSelection.fields['skills'].choices = choicesForSkillSelection          
     data = {'skillForm': skillForm,
-            'languageForm': languageForm,
             'educationForm': educationForm,
             'certifictionForm': certifictionForm,
             'allSkills': allSkills,
             'skillsSelection': skillSelection}
 
     return render(request, 'skills.html', data)
+
+def languages(request):
+    allLanguages = Language.objects.all()
+    languageForm = LanguageForm()
+
+    if request.method == "POST":
+        languageForm = LanguageForm(request.POST)
+        if languageForm.is_valid():
+            languageForm.save()
+    print(allLanguages)
+
+    data = {'languagesForm': languageForm,
+            'allLanguages': allLanguages}
+    return render(request, 'languages.html', data)
+
+def education(request):
+    allEducation = Education.objects.all()
+    educationFrom = EducationForm()
+    
+    if request.method == "POST":
+        educationFrom = EducationForm(request.POST)
+        if educationFrom.is_valid():
+            educationFrom.save()
+    print(allEducation)
+
+    data = {'educationForm': educationFrom,
+            'allEducation': allEducation}
+    return render(request, 'education.html', data)

@@ -1,0 +1,13 @@
+<h1>Hello</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ educationForm.as_div }}
+    <button type="submit">Submit</button>
+</form>
+
+{% for education in allEducation  %}
+<br>
+
+    {{education.name}}
+{% endfor %}

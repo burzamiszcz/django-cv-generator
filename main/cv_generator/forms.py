@@ -20,6 +20,10 @@ class EducationForm(forms.ModelForm):
     class Meta:
         model = Education
         fields = '__all__'
+        widgets = {
+            'start_date': forms.DateInput(attrs={'type': 'date'}),
+            'end_date': forms.DateInput(attrs={'type': 'date'}),
+        }
 
 class CertificationForm(forms.ModelForm):
     class Meta:
