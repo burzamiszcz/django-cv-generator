@@ -1,13 +1,15 @@
-<h1>Hello</h1>
+{% extends '_base.html' %}
 
-<form method="POST">
-    {% csrf_token %}
-    {{ educationForm.as_div }}
-    <button type="submit">Submit</button>
-</form>
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ educationForm.as_div }}
+        <button type="submit">Submit</button>
+    </form>
 
-{% for education in allEducation  %}
-<br>
+    {% for education in allEducation  %}
+    <br>
 
-    {{education.name}}
-{% endfor %}
+        {{education.name}}
+    {% endfor %}
+{% endblock %}

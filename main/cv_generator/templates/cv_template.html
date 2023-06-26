@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/cv_style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">    <script src="https://kit.fontawesome.com/6015f6d8cd.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div class="page">
+        <header>
+            <div class="profile">
+                <img src="profile.jpg"/>
+            </div>
+            <div class="information">
+                <div class="personal">
+                    <h1>{{personalData.name}} {{personalData.surname}}</h1>
+                    <h2>Software Developer</h2>
+                </div>
+                <div class="contact">
+                    <div>
+                        
+                        <div class="contact-elem">
+                            <i class="fa-solid fa-phone"></i>
+                            <a href="tel:{{personalData.phone_number}}">{{personalData.phone_number}}</a>
+                        </div>
+                        <div class="contact-elem">
+                            <i class="fa-solid fa-location-dot"></i>
+                            {{personalData.city}}
+                        </div>
+                    </div>
+                    <div>
+                        <div class="contact-elem">
+                            <i class="fa-sharp fa-solid fa-envelope"></i>
+                            <a href="mailto:{{personalData.email}}">{{personalData.email}}</a>
+                        </div>
+                        <div class="contact-elem">
+                            <i class="fa-brands fa-github"></i>
+                            <a href="{{personalData.github}}">{{personalData.github|slice:"8:"}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="left-col">
+                <section>
+                    <h1>Skills</h1>
+                    <ul>
+                        {% for skill in skillData %}
+                            <li>{{skill.skill_name}}</li>
+                        {% endfor %}
+
+                    </ul>
+                </section>
+                <hr>
+                <section>
+                    <h1>Languages</h1>
+                    <div class="languages-container">
+                        <div class="languages">
+                            {% for language in languageData %}
+                                <p>{{language.language}}</p>
+                            {% endfor %}
+                        </div>
+                        <div class="languages-level">
+                            {% for language in languageData %}
+                                <p>{{language.level}}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section>
+                    <h1>Education</h1>
+                    {% for education in educationData %}
+                    <div class="studies">
+                        <h3>{{education.start_date|date:"Y"}} - {{education.end_date|date:"Y"}}</h3>
+                        <h4>{{education.level}}, 
+                            {{education.name}}</h4>
+                        <h3>{{education.university_name}}</h3>
+                    </div>
+                    {% endfor %}
+                </section>
+                <hr>
+                <section>
+                    <h1>Certifications</h1>
+                    {% for certification in certificationData %}
+                        <div onclick="window.location.href = '{{certification.url}}'" class="cert">{{certification.name}}</div>
+                    {% endfor %}
+                </section>
+                
+            </div>
+            <div class="right-col">
+                <section>
+                    <h1>About me</h1>
+                    <a>{{personalData.about_me}}</a>
+                </section>
+                <section>
+                    <h1>Experience</h1>
+                    <div class="experience">
+                        <h2>2022/10 - Now (<span id="monthNumber"></span> Months)</h2>
+                        <h3>Software Developer | Capgemini</h3>
+                        <ul>
+                            <li>Manage the production of reports in the banking sector.</li>
+                            <li>Gathering the necessary data to update the databases</li>
+                        </ul>
+                    </div>
+                    <div class="experience">
+                        <h2>2021/02 - 2022/10 (1 Year 9 Months)</h2>
+                        <h3>Junior Developer | BOSCH</h3>
+                        <ul>
+                            <li>Prepare, train and implement the AI model on the production line to detect defective production components.</li>
+                            <li>Development web app to support the student internship billing system</li>
+                            <li>Write scripts for automation generation of daily reports</li>
+                        </ul>
+                    </div>
+                    <div class="experience">
+                        <h2>2018/05 - 2018/10 (6 Months)</h2>
+                        <h3>Logistic Sector Employee | Castorama</h3>
+                        <ul>
+                            <li>Warehouse documentation maintanance.</li>
+                            <li>Data processing and analysis.</li>
+                        </ul>
+                    </div>
+                </section>
+            <div class="rodo">
+                <p>I agree to the processing of personal data provided in this document for realising the recruitment process pursuant to the Personal Data Protection Act of 10 May 2018 (Journal of Laws 2018, item 1000) and in agreement with Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 on the protection of natural persons with regard to the processing of personal data and on the free movement of such data, and repealing Directive 95/46/EC (General Data Protection Regulation)</p>
+            </div>
+            </div>
+        </main>
+    
+    </div>
+
+<script>
+    const startDate = new Date(2022, 9, 1);
+    const endDate = new Date();
+    const diffTime = Math.abs(endDate - startDate);
+    const diffMonths = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 30));
+    
+    document.getElementById("monthNumber").innerHTML = diffMonths;
+
+
+    var printHover = document.getElementById("print-hover")
+    var cvDownload = document.querySelector(".cv-download")
+    var paperPage = document.querySelector(".paper-page")
+    var body = document.querySelector("body")
+
+    printHover.addEventListener("mouseover", function(){
+        cvDownload.classList.add("print");
+        paperPage.classList.add("print");
+        body.classList.add("print");
+    })
+    printHover.addEventListener("mouseout", function(){
+        cvDownload.classList.remove("print");
+        paperPage.classList.remove("print");
+        body.classList.remove("print");
+    })
+    printHover.addEventListener("click", function(){
+        window.print();
+    })
+</script>
+<script>
+    function updateScale() {
+        const pageElement = document.querySelector('.page');
+        if (window.innerWidth > 1000) {
+            const scaleValue = 0.97 * (window.innerHeight / pageElement.offsetHeight);
+            pageElement.style.transform = `scale(${scaleValue})`;
+        } else {
+            // Reset scale to 1 if width is 1000 or less
+            const scaleValue = 1 * (window.innerWidth / pageElement.offsetWidth);
+            pageElement.style.transform = `scale(${scaleValue})`;
+        }
+    }
+
+
+    // Initial scale update
+    updateScale();
+
+    // Update scale on window resize
+    window.addEventListener('resize', updateScale);
+  </script>
+</body>
+</html>

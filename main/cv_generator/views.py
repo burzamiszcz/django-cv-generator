@@ -13,6 +13,7 @@ def personal_data(request):
     form = {'PersonalDataForm': PersonalDataForm(instance = instance)}
     return render(request, 'personal_data.html', form)
 
+
 def skills(request):
     if request.method == "POST":
         choicesForSkillSelection = [(skill.skill_name, skill.skill_name) for skill in Skill.objects.all()]
@@ -31,17 +32,14 @@ def skills(request):
     choicesForSkillSelection = [(skill.skill_name, skill.skill_name) for skill in Skill.objects.all()]
     allSkills = Skill.objects.all()
     skillForm = SkillForm()
-    educationForm = EducationForm()
-    certifictionForm = CertificationForm()
     skillSelection = SkillSelectionForm(initial={'skills':[skill.skill_name for skill in Skill.objects.all() if skill.status]})
     skillSelection.fields['skills'].choices = choicesForSkillSelection          
     data = {'skillForm': skillForm,
-            'educationForm': educationForm,
-            'certifictionForm': certifictionForm,
             'allSkills': allSkills,
             'skillsSelection': skillSelection}
 
     return render(request, 'skills.html', data)
+
 
 def languages(request):
     allLanguages = Language.objects.all()
@@ -57,6 +55,7 @@ def languages(request):
             'allLanguages': allLanguages}
     return render(request, 'languages.html', data)
 
+
 def education(request):
     allEducation = Education.objects.all()
     educationFrom = EducationForm()
@@ -70,3 +69,31 @@ def education(request):
     data = {'educationForm': educationFrom,
             'allEducation': allEducation}
     return render(request, 'education.html', data)
+
+
+def certification(request):
+    allCertification = Certification.objects.all()
+    certificationForm = CertificationForm()
+    
+    if request.method == "POST":
+        certificationForm = CertificationForm(request.POST)
+        if certificationForm.is_valid():
+            certificationForm.save()
+    print(allCertification)
+
+    data = {'certificationForm': certificationForm,
+            'allCertification': allCertification}
+    return render(request, 'certification.html', data)
+
+def cv(request):
+    personalData = PersonalData.objects.get(pk=1)
+    skillsData = Skill.objects.all()
+    languageData = Language.objects.all()
+    educationData = Education.objects.all()
+    certificationData = Certification.objects.all()
+    data = {'personalData': personalData,
+            'skillData': skillsData,
+            'languageData': languageData,
+            'educationData': educationData,
+            'certificationData': certificationData}
+    return render(request, 'cv_template.html', data)

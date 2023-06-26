@@ -3,13 +3,13 @@
 {% block content %}
     <form method="POST">
         {% csrf_token %}
-        {{ languagesForm.as_div }}
+        {{ certificationForm.as_div }}
         <button type="submit">Submit</button>
     </form>
 
-    {% for language in allLanguages  %}
+    {% for certification in allCertification  %}
     <br>
 
-        {{language.language}} {{language.level}}
+        {{certification.name}}
     {% endfor %}
 {% endblock %}
