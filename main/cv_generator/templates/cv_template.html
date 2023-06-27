@@ -29,7 +29,7 @@
                         
                         <div class="contact-elem">
                             <i class="fa-solid fa-phone"></i>
-                            <a href="tel:{{personalData.phone_number}}">{{personalData.phone_number}}</a>
+                            <a href="tel:{{personalData.phone_number}}">{{personalData.phone_number|slice:":3"}} {{personalData.phone_number|slice:"3:6"}} {{personalData.phone_number|slice:"6:9"}} {{personalData.phone_number|slice:"9:12"}}</a>
                         </div>
                         <div class="contact-elem">
                             <i class="fa-solid fa-location-dot"></i>
@@ -149,6 +149,7 @@
 
     // Update scale on window resize
     window.addEventListener('resize', updateScale);
+    
   </script>
 </body>
 </html>

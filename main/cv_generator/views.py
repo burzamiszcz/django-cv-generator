@@ -102,6 +102,7 @@ def experience(request):
     data = {'experienceForm': experienceForm,
             'allExperience': allExperience}
     return render(request, 'experience.html', data)
+
 def experienceEdit(request, id):
     experienceId = Experience.objects.get(pk=id)
     experienceForm = ExperienceForm(instance=experienceId)
@@ -134,11 +135,7 @@ def cv(request):
             delta = date.today() - object.start_date
         else:
             delta = datetime.strptime(object.end_date, "%Y-%m-%d").date() - object.start_date
-
-        # Calculate the total number of months and remaining days
         total_months = delta.days // 30
-
-        # Calculate the equivalent years and months
         years = total_months // 12
         months = total_months % 12 + 1
         if years > 0:
