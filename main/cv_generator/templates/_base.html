@@ -17,5 +17,24 @@
         {% endblock %}
         </div>
     </div>
+
+    <script>
+        // JavaScript code
+        const nowCheckbox = document.getElementById('id_now_checkbox');
+        const endDateInput = document.getElementById('id_end_date');
+    
+        nowCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                endDateInput.disabled = true;
+            } else {
+                endDateInput.disabled = false;
+            }
+        });
+    
+        // Optional: Set initial state based on checkbox status
+        if (nowCheckbox.checked) {
+            endDateInput.disabled = true;
+        }
+    </script>
 </body>
 </html>

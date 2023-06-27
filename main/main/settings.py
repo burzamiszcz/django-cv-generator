@@ -68,12 +68,10 @@ TEMPLATES = [
     },
 ]
 STATIC_URL = 'static'
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
+
 WSGI_APPLICATION = 'main.wsgi.application'
 
-
+MEDIA_ROOT = 'media'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 

@@ -11,15 +11,57 @@
     <button type="submit">Submit</button>
     </form>
 
-
     <form method="POST">
         {% csrf_token %}
-
-        {% for field in skillsSelection %}
-            {{ field }}
-        {% endfor %}
-
+    
+        <div id="fieldContainer">
+            {% for field in allSkills %}
+            <div class="fieldItem {% if field.status %}active{% endif %}" data-skill="{{ field.skill_name }}">{{ field.skill_name }}</div>
+            {% endfor %}
+        </div>
+    
+        <input type="hidden" id="fieldOrderInput" name="fieldOrder" value="">
+        <input type="hidden" id="activeStatusInput" name="activeStatus" value="">
+    
         <button type="submit">Save</button>
     </form>
+
+
+    <script>
+        updateFieldOrder();
+        updateActiveStatus();
+
+        $(document).ready(function() {
+            $("#fieldContainer").sortable({
+                update: function(event, ui) {
+                    updateFieldOrder();
+                    updateActiveStatus();
+                }
+            });
     
+            $("#fieldContainer .fieldItem").click(function() {
+                $(this).toggleClass("active");
+                updateFieldOrder();
+                updateActiveStatus();
+            });
+        });
+    
+        function updateFieldOrder() {
+            var fieldOrder = [];
+            $("#fieldContainer .fieldItem").each(function() {
+                fieldOrder.push($(this).data("skill"));
+            });
+            $("#fieldOrderInput").val(fieldOrder.join(';'));
+        }
+    
+        function updateActiveStatus() {
+            var activeStatus = [];
+            $("#fieldContainer .fieldItem").each(function() {
+                var isActive = $(this).hasClass("active");
+                activeStatus.push(isActive ? "active" : "inactive");
+            });
+            $("#activeStatusInput").val(activeStatus.join(';'));
+        }
+    </script>
+
 {% endblock %}

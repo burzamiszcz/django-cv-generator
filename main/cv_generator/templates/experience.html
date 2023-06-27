@@ -1,0 +1,22 @@
+{% extends '_base.html' %}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ experienceForm.as_div }}
+        <button type="submit">Submit</button>
+    </form>
+
+    {% for experience in allExperience  %}
+    <a href="{% url 'experienceEdit' id=experience.id%}">
+        <div class="language">
+            {{ experience.start_date|date:"Y" }}-{{ experience.start_date|date:"m" }} - {{experience.end_date|slice:":7"}}<br>
+            {{experience.company_name}}, {{experience.position_name}}<br>
+            {% for resposibility in experience.responsibilites %}
+            <br>
+            - {{resposibility}}
+            {% endfor %}
+        </div>
+    </a>
+{% endfor %}
+{% endblock %}

@@ -8,8 +8,11 @@
     </form>
 
     {% for education in allEducation  %}
-    <br>
-
-        {{education.name}}
+        <div class="language">
+            {{education.start_date|date:"Y"}} - {{education.end_date|date:"Y"}}<br>
+            {{education.level}}, {{education.name}}<br>
+            {{education.university_name}}
+        </div>
+        
     {% endfor %}
 {% endblock %}

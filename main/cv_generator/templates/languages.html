@@ -8,8 +8,8 @@
     </form>
 
     {% for language in allLanguages  %}
-    <br>
-
-        {{language.language}} {{language.level}}
+        <div class="language">
+        {{language.language}} | {{language.level}}
+        </div>
     {% endfor %}
 {% endblock %}

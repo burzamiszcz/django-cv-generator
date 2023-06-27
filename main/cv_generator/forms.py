@@ -30,7 +30,29 @@ class CertificationForm(forms.ModelForm):
         model = Certification
         fields = '__all__'
 
-class SkillSelectionForm(forms.Form):
-    skills = forms.MultipleChoiceField(
-        widget=forms.CheckboxSelectMultiple
-    )
+class ExperienceForm(forms.ModelForm):
+    now_checkbox = forms.BooleanField(required=False, label="Select if it is current job")
+
+    class Meta:
+        model = Experience
+        fields = ['start_date', 'end_date', 'now_checkbox', 'company_name', 'position_name', 'responsibilites']
+        widgets = {
+            'start_date': forms.DateInput(attrs={'type': 'date'}),
+            'end_date': forms.DateInput(attrs={'type': 'date'}),
+        }
+        labels = {
+            'responsibilites': 'Responsibilities: (delimit them by \'.\' sign)'
+        }
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        now_checkbox = self.cleaned_data.get('now_checkbox')
+        
+        if now_checkbox:
+            instance.end_date = 'Now'
+        
+        if commit:
+            instance.save()
+        
+        return instance
+        

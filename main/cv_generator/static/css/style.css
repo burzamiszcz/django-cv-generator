@@ -37,6 +37,10 @@ div{
     margin: 10px;
 }
 
+.as-div-class{
+    width: 60%;
+    margin: auto;
+}
 
 .as-div-class form{
     display: flex;
@@ -45,10 +49,10 @@ div{
 
 .as-div-class div{
     padding: 2px;
-    width: 80%;
     display: flex;
     flex-direction: column;
     margin: auto;
+    width: 100%;
 }
 
 .as-div-class button{
@@ -57,7 +61,27 @@ div{
     cursor: pointer;
 }
 
-input[type="checkbox"] {
-    margin: 5px;
-    width: 30px;
-  }
+.as-div-class .fieldItem {
+    padding: 5px;
+    background-color: rgb(202, 202, 202);
+    margin: 1px;
+    cursor: pointer;
+    /* width: 50%; */
+    margin: 1px auto;
+    color: rgba(0, 0, 0, 0.103);
+}
+
+.as-div-class .fieldItem.active {
+    padding: 5px;
+    background-color: rgb(90, 90, 90);
+    color: white;
+}
+
+.as-div-class .language{
+    background-color: rgb(90, 90, 90);
+    color: white;
+    border: 1px solid black;
+    width: 100%;
+    padding: 4px;
+    margin-top: 5px;
+}

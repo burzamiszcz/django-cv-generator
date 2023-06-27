@@ -16,7 +16,8 @@
     <div class="page">
         <header>
             <div class="profile">
-                <img src="profile.jpg"/>
+                <img src="{{personalData.photo}}"/>
+                
             </div>
             <div class="information">
                 <div class="personal">
@@ -103,31 +104,23 @@
                 </section>
                 <section>
                     <h1>Experience</h1>
+                    {% for experience, period in experienceData %}
+                        {% with index=forloop.counter0 %}
+
+                    {{experiece}}
                     <div class="experience">
-                        <h2>2022/10 - Now (<span id="monthNumber"></span> Months)</h2>
-                        <h3>Software Developer | Capgemini</h3>
+                        <h2> {{ experience.start_date|date:"Y" }}-{{ experience.start_date|date:"m" }} - {{experience.end_date|slice:":7"}} ({{period}})</h2>
+                        <h3>{{experience.position_name}} | {{experience.company_name}}</h3>
                         <ul>
-                            <li>Manage the production of reports in the banking sector.</li>
-                            <li>Gathering the necessary data to update the databases</li>
+                            {% for resposibility in experience.responsibilites %}
+                            <li>{{resposibility}}</li>
+
+                            {% endfor %}
                         </ul>
                     </div>
-                    <div class="experience">
-                        <h2>2021/02 - 2022/10 (1 Year 9 Months)</h2>
-                        <h3>Junior Developer | BOSCH</h3>
-                        <ul>
-                            <li>Prepare, train and implement the AI model on the production line to detect defective production components.</li>
-                            <li>Development web app to support the student internship billing system</li>
-                            <li>Write scripts for automation generation of daily reports</li>
-                        </ul>
-                    </div>
-                    <div class="experience">
-                        <h2>2018/05 - 2018/10 (6 Months)</h2>
-                        <h3>Logistic Sector Employee | Castorama</h3>
-                        <ul>
-                            <li>Warehouse documentation maintanance.</li>
-                            <li>Data processing and analysis.</li>
-                        </ul>
-                    </div>
+                    {% endwith %}
+                    {% endfor %}
+
                 </section>
             <div class="rodo">
                 <p>I agree to the processing of personal data provided in this document for realising the recruitment process pursuant to the Personal Data Protection Act of 10 May 2018 (Journal of Laws 2018, item 1000) and in agreement with Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 on the protection of natural persons with regard to the processing of personal data and on the free movement of such data, and repealing Directive 95/46/EC (General Data Protection Regulation)</p>
@@ -137,34 +130,6 @@
     
     </div>
 
-<script>
-    const startDate = new Date(2022, 9, 1);
-    const endDate = new Date();
-    const diffTime = Math.abs(endDate - startDate);
-    const diffMonths = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 30));
-    
-    document.getElementById("monthNumber").innerHTML = diffMonths;
-
-
-    var printHover = document.getElementById("print-hover")
-    var cvDownload = document.querySelector(".cv-download")
-    var paperPage = document.querySelector(".paper-page")
-    var body = document.querySelector("body")
-
-    printHover.addEventListener("mouseover", function(){
-        cvDownload.classList.add("print");
-        paperPage.classList.add("print");
-        body.classList.add("print");
-    })
-    printHover.addEventListener("mouseout", function(){
-        cvDownload.classList.remove("print");
-        paperPage.classList.remove("print");
-        body.classList.remove("print");
-    })
-    printHover.addEventListener("click", function(){
-        window.print();
-    })
-</script>
 <script>
     function updateScale() {
         const pageElement = document.querySelector('.page');

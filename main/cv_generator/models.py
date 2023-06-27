@@ -8,7 +8,7 @@ class PersonalData(models.Model):
     city = models.CharField(max_length=30)
     github = models.URLField(max_length=200)
     about_me = models.TextField()
-    photo = models.ImageField()
+    photo = models.ImageField(upload_to='images/')
 
     def __str__(self) -> str:
         return self.name + self.surname
@@ -16,16 +16,24 @@ class PersonalData(models.Model):
 class Skill(models.Model):
     skill_name = models.CharField(max_length=50, unique=True)
     status = models.BooleanField(default=False)
+    order = models.IntegerField(default=0)
 
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self) -> str:
+        return self.skill_name
+
+        
 class Language(models.Model):
     language = models.CharField(max_length=50)
     LEVEL_CHOICES = (
-        ('Na', 'Native'),
+        ('Native', 'Native'),
         ('B1', 'B1'),
         ('B2', 'B2'),
         ('C1', 'C1'),
     )
-    level = models.CharField(verbose_name='Level', max_length=2, choices=LEVEL_CHOICES)
+    level = models.CharField(verbose_name='Level', max_length=6, choices=LEVEL_CHOICES)
 
 class Education(models.Model):
     name = models.CharField(max_length=50)
@@ -33,11 +41,11 @@ class Education(models.Model):
     start_date = models.DateField()
     end_date  = models.DateField()
     LEVEL_CHOICES = (
-        ('Bachelor', 'Bachelor degree'),
-        ('Engineer', 'Engineer degree'),
-        ('Master', 'Master degree'),
+        ('Bachelor Degree', 'Bachelor degree'),
+        ('Engineering Degree', 'Engineer degree'),
+        ('Master Degree', 'Master degree'),
     )
-    level = models.CharField(verbose_name='Level', max_length=10, choices=LEVEL_CHOICES)
+    level = models.CharField(verbose_name='Level', max_length=18, choices=LEVEL_CHOICES)
 
 class Certification(models.Model):
     name = models.CharField(max_length=50)
@@ -45,6 +53,7 @@ class Certification(models.Model):
 
 class Experience(models.Model):
     start_date = models.DateField()
-    end_date  = models.DateField()
+    end_date = models.CharField(max_length=10, null=True, blank=True)
     company_name = models.CharField(max_length=50)
+    position_name = models.CharField(max_length=50)
     responsibilites = models.TextField()
