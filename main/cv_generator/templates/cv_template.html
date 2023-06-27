@@ -95,7 +95,9 @@
                 <section>
                     <h1>Certifications</h1>
                     {% for certification in certificationData %}
-                        <div onclick="window.location.href = '{{certification.url}}'" class="cert">{{certification.name}}</div>
+                    <div class="cert"><a href="{{certification.url}}">{{certification.name}}</a></div>
+                        
+
                     {% endfor %}
                 </section>
                 

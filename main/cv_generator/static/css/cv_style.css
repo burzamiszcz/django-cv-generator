@@ -7,6 +7,10 @@ body {
     overflow-x: hidden;
   }
 
+  main .left-col a, a:active, a:link{
+    color: black;
+}
+
 .page {
     width: 8.3in;
     height: 11.7in;
