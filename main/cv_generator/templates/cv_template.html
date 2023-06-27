@@ -9,20 +9,24 @@
     <link rel="stylesheet" href="{% static 'css/cv_style.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">    <script src="https://kit.fontawesome.com/6015f6d8cd.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">   
+    <script src="https://kit.fontawesome.com/6015f6d8cd.js" crossorigin="anonymous"></script>
 
 </head>
 <body>
     <div class="page">
         <header>
+
             <div class="profile">
                 <img src="{{personalData.photo}}"/>
                 
             </div>
             <div class="information">
                 <div class="personal">
-                    <h1>{{personalData.name}} {{personalData.surname}}</h1>
+                    <h1>{{personalData.name}} {{personalData.surname}} &nbsp;	<i id="download-button" class="fa-solid fa-cloud-arrow-down fa-2xs"></i></h1>
+                    
                     <h2>Software Developer</h2>
+                    <i class=""></i>
                 </div>
                 <div class="contact">
                     <div>
@@ -150,6 +154,25 @@
     // Update scale on window resize
     window.addEventListener('resize', updateScale);
     
+
+    document.getElementById('download-button').addEventListener('click', function() {
+        console.log('hehe')
+        var element1 = document.querySelector('.page')
+        var element2 = document.getElementById('download-button')
+        element1.classList.add('download');
+        element2.classList.add('download');
+        document.body.classList.add('download');
+        element1.style.transform = `scale(1)`;
+        window.print()
+        updateScale();
+        element1.classList.remove('download');
+        element2.classList.remove('download');
+        document.body.classList.remove('download');
+
+        }
+      );
+
+
   </script>
 </body>
 </html>

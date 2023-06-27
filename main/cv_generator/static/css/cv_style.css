@@ -214,3 +214,22 @@ main .right-col .rodo{
 
     }
 }
+
+.fa-2xs{
+    cursor: pointer;
+}
+
+body.download{
+    overflow-y: scroll;
+    overflow-x: scroll;
+}
+
+.page.download{
+    margin: 0px;
+    transform: scale(1);
+    height: 11.73in;
+}
+
+#download-button.download{
+    display: none;
+}
