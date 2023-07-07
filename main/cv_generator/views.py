@@ -5,7 +5,10 @@ from .models import *
 from datetime import datetime, date, timedelta
 
 def personal_data(request):
-    instance = PersonalData.objects.get(pk=1)
+    try:
+        instance = PersonalData.objects.get(pk=1)
+    except PersonalData.DoesNotExist:
+        instance = None
     if request.method == "POST":
         form = PersonalDataForm(request.POST, request.FILES, instance=instance)
         if form.is_valid():
